@@ -9,9 +9,14 @@ import google.generativeai as genai
 import uuid
 from pgvector.psycopg2 import register_vector
 import io
+import os
+from dotenv import load_dotenv
 
-NEON_DB_URL = "postgresql://documents_owner:npg_kIaT4OsYeKw8@ep-empty-resonance-a5o1pqx0-pooler.us-east-2.aws.neon.tech/documents?sslmode=require"
-GEMINI_API_KEY = "AIzaSyDa3giOkK9xlwIiP7h0lsuT80ekPiuX7rc"
+load_dotenv()
+
+# Initialize Supabase and Gemini
+NEON_DB_URL = os.getenv("NEON_DB_URL")
+GEMINI_API_KEY = os.getenv("GEMINI_API_KEY")
 
 conn = psycopg2.connect(NEON_DB_URL)
 register_vector(conn)  # Enable vector support
